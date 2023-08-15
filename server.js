@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -10,10 +12,10 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 const signupDB = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Gani@123', 
-  database: 'mydatabase',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 signupDB.connect(err => {
