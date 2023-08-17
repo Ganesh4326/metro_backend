@@ -104,9 +104,23 @@ app.post('/api/login', (req, res) => {
       res.status(401).send('Invalid credentials');
       return;
     }
-    res.status(200).send('Login successful');
+    res.status(200).send(result);
   });
 });
+
+app.get('/api/places', (req, res) => {
+  console.log("plaves");
+  signupDB.query('SELECT station_name, tourist_place FROM tourist_places', (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error fetching data from database' });
+    } else {
+      console.log(results);
+      res.json(results);
+    }
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
